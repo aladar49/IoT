@@ -1,0 +1,59 @@
+<% include head_before_title %>
+Machine status
+<% include head_after_title %>
+
+<% include signed_navbar %>
+
+<div class="container">
+    <script type="text/javascript">
+        var form = document.getElementById("form");
+
+        document.getElementById("create").addEventListener("click", function () {
+            console.log('create');
+        });
+    </script>
+
+    <form data-toggle="validator" role="form" id="form" method="get" action="/getStatusByStation">
+    <p2>Welcome <%- user.name; %>!</p2>
+    </br></br>
+    <p2>Machine status</p2>
+    <table class="table table-hover" id="table">
+        <thead>
+        <tr class="clickable-row">
+            <th>Machine</th>
+            <th>Machine</th>
+            <th>Timestamp</th>
+            <th>Stock</th>
+            <th>Health</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% machineStatusList.forEach(function(machineStatus) { %>
+            <tr class="clickable-row">
+                <td><%= machineStatus.station    %></td>
+                <td><%= machineStatus._id    %></td>
+                <td><%= moment(machineStatus.timestamp).format( 'YYYY. MM. DD. hh:MM:ss')  %></td>
+                <td><%= machineStatus.stockStatus %></td>
+                <td><%= machineStatus.machineHealth %></td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+        <div class="form-group col-lg-4">
+            <label for="station" class="control-label">Station</label>
+            <select class="selectpicker form-control" data-style="btn-info" name="station" id="station">
+                <optgroup label="Select Table">
+                     <option value=""></option>
+                        <% stations.forEach(function(station){ %>
+                        <option value="<%= station.name %>"><%= station.name %></option>
+                        <% }) %>
+                </optgroup>
+            </select>
+            <label for="station" class="control-label">Departure</label>
+            <input name="date" type="datetime-local" class="form-control" id="date" >
+            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Check"></input>
+        </div>
+    </form>
+</div>
+
+<% include footer %>

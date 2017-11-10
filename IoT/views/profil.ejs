@@ -1,0 +1,41 @@
+<% include head_before_title %>
+Edit profil
+<% include head_after_title %>
+
+<% include signed_navbar %>
+
+<div class="container">
+    <form data-toggle="validator" role="form" method="post" action="/profil">
+        <div class="form-group">
+            <label for="name" class="control-label">Name</label>
+            <input name="name" type="text" class="form-control" id="name" value=<%- user.name; %>
+        </div>
+        <div class="form-group">
+            <label for="email" class="control-label">Email</label>
+            <input name="email" type="email" class="form-control" id="email" value=<%- user.email; %>
+                   data-error="Bruh, that email address is invalid">
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="control-label">Password</label>
+            <div class="form-inline row">
+                <div class="form-group col-sm-6">
+                    <input name="password" type="password" data-minlength="6" class="form-control" id="password"
+                           placeholder="Password" required>
+                    <div class="help-block">Minimum of 6 characters</div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <input name="passwordConfirm" type="password" class="form-control" id="passwordConfirm" data-match="#inputPassword"
+                           data-match-error="Whoops, these don't match" placeholder="Confirm" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Edit"></input>
+            <a type="submit" class="btn btn-default" href="/user/delete">Delete</a>
+        </div>
+    </form>
+</div>
+
+<% include footer %>
